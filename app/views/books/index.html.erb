@@ -1,0 +1,24 @@
+<div class = "book-index">
+<% @books.each do |book| %>
+ <div class = "book-comment">
+   <span class = "title"><%= book.title %></span>
+   <span class = "body"><%= book.body %></span>
+ </div>
+
+
+ <span class = show>
+  <%= link_to 'Show', "/books/#{book.id}" %>
+ </span>
+
+ <span class =edit>
+  <%= link_to 'Edit', "/books/#{book.id}/edit" %>
+ </span>
+
+ <span class = destroy>
+  <%= link_to 'Destroy', "/books/#{book.id}", method: :delete, "data-confirm" => 'Are you sure?' %>
+ </span>
+
+<% end %>
+</div>
+
+
