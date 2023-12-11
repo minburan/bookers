@@ -3,14 +3,20 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
-  def create
-    book = Book.new(list_params)
-    book.save
-    redirect_to '/books/index'
-  end
-
   def index
    @books = Book.all
+   @book = Book.new
+  end
+
+  def create
+    @book = Book.new(list_params)
+    if @book.save
+      flash[:notice] = "Book was successfully created."
+      redirect_to book_path(@book.id)
+    else
+      @books = Book.all
+      render :index
+    end
   end
 
   def show
@@ -22,9 +28,13 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book)
+    @book = Book.find(params[:id])
+    if @book.update(list_params)
+     flash[:notice] = "Book was successfully updated." 
+     redirect_to book_path(@book.id)
+    else
+     render :edit 
+    end 
   end
 
   def destroy
@@ -35,7 +45,7 @@ class BooksController < ApplicationController
 
   private
   #ストロングパロメータ
-  def book_params
+  def list_params
     params.require(:book).permit(:title, :body)
   end
 

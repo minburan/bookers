@@ -1,11 +1,16 @@
-<h2>Title</h2>
-<p><%= @book.title %></p>
+<div class ="flex">
+ <strong>Title:　</strong>
+ <p><%= @book.title %></p>
+</div>
 
-<h2>Body</h2>
-<p><%= @book.body %></p>
+<div class ="flex">
+ <strong>Body:　</strong>
+ <p><%= @book.body %></p>
+</div>
 
 <span>
  <%= link_to 'Edit', "/books/#{@book.id}/edit" %>
+ |
 </span>
   
 <span>
